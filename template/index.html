@@ -1,0 +1,348 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nabla&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Margarine&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <style>
+
+        html, body {
+          width: 100%;
+          background-image: linear-gradient(to right,  #d8a300, #f16a00, #f41414);
+          background-repeat:repeat-y;
+          overflow-x: hidden;
+        }
+
+        
+        #otsikko {
+          margin:  10%;
+          font-family: 'Nabla', cursive;
+          font-size:48px;
+          background-color: transparent;
+          text-align: center;
+
+        }
+
+        #boksi {
+          display: inline;
+          
+          background-color: transparent;
+          opacity: 0,5;
+        }
+        .teksti {
+          border: black solid 3px;
+          border-radius: 2cm;
+          background-color: transparent;
+        }
+
+        #error{
+          color:darkgreen;
+        }
+        #Pelaajakortti1{
+          margin: auto;
+          float: none;
+          position: relative;
+        }
+        #Pelaajakortti2{
+          margin: auto;
+          float: none;
+          position: relative;
+        }
+        #vs {
+          font-family: 'Monoton', cursive;
+          color: black;
+          margin-top: 3%;
+          size: 63px;
+          text-align: center;
+        }
+        #alkaapianteksti{
+          font-family: 'Margarine', cursive;
+        }
+
+        #labeli1 {
+          font-family: 'Mochiy Pop One', sans-serif;
+        }
+        #labeli2 {
+          font-family: 'Mochiy Pop One', sans-serif;
+        }
+        #ok {
+          border: black 2px solid;
+          border-radius: 2px;
+          background-color: transparent;
+          font-family: 'Mochiy Pop One', sans-serif;
+        }
+        ul {
+          list-style-type: square;
+        }
+
+
+
+      </style>
+    <title>Ruokarähinä</title>
+  </head>
+
+
+
+
+
+  <body>
+    <div id="boksi">
+      <h1 id="otsikko">
+        Ruokarähinä
+      </h1>
+    
+    </div>
+    <div class="row d-flex justify-content-center align-items-center h-100" id="maincard">
+
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+
+      <div class="card-body p-5 text-center">
+
+        <div class="mb-md-5 mt-md-4 pb-5">
+          <p id="error"></p>
+
+          <div class="form-outline form-white mb-4" id="ensimmainen">
+            <label for="vastus1" class="form-label" id="labeli1">Ruoka1</label> 
+            
+            <input list="vastus" name="browser" id="vastus1" class=" form-control form-control-lg teksti" onfocus="KorostaTeksti1()" onblur="PoistaKorostus1()">
+            <datalist id="vastus">
+
+            </datalist>
+          </div>
+          <div class="form-outline form-white mb-4" id="toinen">
+            <label for="vastus2" class="form-label" id="labeli2">Ruoka2</label> 
+            
+            <input list="2vastus" name="browser" id="vastus2" class=" form-control form-control-lg teksti" onfocus="KorostaTeksti2()" onblur="PoistaKorostus2()">
+            <datalist id="2vastus">
+
+            </datalist>
+          </div>
+          <button id="ok" >OK</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    
+  </body>
+  <script>
+    var RuokaHahmot = [];
+    var ValitutPelaajat = [];
+    var vastus1Data = "";
+    var vastus2Data = "";
+    var hahmo1Tiedot = {};
+    var hahmo2Tiedot = {};
+    var delay1 = 0;
+    var delay2 = 0;
+
+    function readData(){
+      vastus1Data = document.getElementById('vastus1').value;
+      vastus2Data = document.getElementById('vastus2').value;
+      if(vastus1Data != "" && vastus1Data != " " && vastus2Data != "" && vastus2Data != " " && RuokaHahmot.includes(vastus1Data) == true && RuokaHahmot.includes(vastus2Data) == true){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    function KorostaTeksti1(){
+      var teksti1 = document.getElementById('labeli1').style.color = "white";
+    }
+
+    function KorostaTeksti2(){
+      var teksti2 = document.getElementById('labeli2').style.color = "white";
+    }
+    function PoistaKorostus1(){
+      var teksti2 = document.getElementById('labeli1').style.color = "black";
+    }
+    function PoistaKorostus2(){
+      var teksti1 = document.getElementById('labeli2').style.color = "black";
+    }
+
+    function DataParser(){
+      const hahmo1 = ValitutPelaajat[0];
+      const hahmo2 = ValitutPelaajat[1];
+      for (const [key, value] of Object.entries(hahmo1)) {
+        hahmo1Tiedot[key] = value;
+        
+      }
+      for (const [key, value] of Object.entries(hahmo2)) {
+        hahmo2Tiedot[key] = value;
+        
+      }
+
+    }
+
+    function uusiKierros(){
+      location.replace("http://127.0.0.1:5000/");
+    }
+
+
+
+    function AloitaOttelu(delay1,delay2){
+      var aika = 0;
+      let rivit = [];
+      let kumpi = 0;
+      setTimeout(function(){
+        $("#ensimmainen").toggle(1000);
+      },9000);
+      rivit.push("0s Taistelu alkaa");
+      
+
+      setTimeout(function(){
+        
+        while(hahmo1Tiedot.kalorit > 0 && hahmo2Tiedot.kalorit > 0){
+          if(kumpi % 2 == 0){
+            hahmo2Tiedot.kalorit -= hahmo1Tiedot.hiilihydraatit;
+            aika = parseFloat(aika) + parseFloat(delay1);
+            rivit.push(`${aika.toPrecision(3)} s ${hahmo1Tiedot.nimi} lyö ja tekee ${hahmo1Tiedot.hiilihydraatit.toPrecision(2)} vahinkoa. ${hahmo2Tiedot.nimi} jäi ${parseFloat(hahmo2Tiedot.kalorit.toPrecision(2))} \n`);
+            
+          }
+          if(kumpi % 2 == 1){
+            hahmo1Tiedot.kalorit -= hahmo2Tiedot.hiilihydraatit;
+            aika = aika + parseFloat(delay2);
+            rivit.push(`${aika.toPrecision(3)} s ${hahmo2Tiedot.nimi} lyö ja tekee ${hahmo2Tiedot.hiilihydraatit.toPrecision(2)} vahinkoa. ${hahmo1Tiedot.nimi} jäi ${parseFloat(hahmo1Tiedot.kalorit.toPrecision(2))} \n`);
+            
+          }
+          kumpi += 1;
+
+        }
+        
+        setTimeout(function(){
+          $("#toinen").append('<div class="card" id="tuloscard"></div>');
+          $("#tuloscard").append('<ul id="tulokset"></ul>');
+          for(var alkio of rivit){
+            $("#tulokset").append(`<li>${alkio}</li>`);
+            
+          }
+          if(hahmo1Tiedot.kalorit > hahmo2Tiedot.kalorit){
+            $("#tulokset").append(`<li><b>${hahmo1Tiedot.nimi} voitti!</b></li>`);
+          } else {
+            $("#tulokset").append(`<li><b>${hahmo2Tiedot.nimi} voitti!</b></li>`);
+            
+          }
+          $("#tulokset").append(`<button class="btn btn-dark" onclick="uusiKierros()">↻Uudelleen↻</button>`);
+
+        },4000);
+      },2000);
+    }
+
+
+    //Luetaan ykkös textfieldin tekstiä ja haetaan ajaxia käyttäen ruoka-aineita
+    $(document).ready(function() {
+      $("#vastus1").keyup(function(){
+        vastusvalue = this.value.replace("/", "");
+        osoite = "http://127.0.0.1:5000/data/vastus".replace("vastus", vastusvalue);
+        
+        $.get(osoite, function(data, status){
+          $('#vastus').empty().append(data); 
+          tiedotMjono = data.split(">");
+          for(var i of tiedotMjono){
+            var x = i.slice(15,-1);
+            if(!RuokaHahmot.includes(x)){
+              RuokaHahmot.push(x);
+            }
+          }
+          
+        });
+
+
+         
+      });
+      //Luetaan kakkos textfieldin tekstiä ja haetaan ajaxia käyttäen ruoka-aineita
+      $("#vastus2").keyup(function(){
+        vastusvalue = this.value.replace("/","");
+        osoite = "http://127.0.0.1:5000/data/vastus".replace("vastus", vastusvalue);
+        
+        $.get(osoite, function(data, status){
+          $('#2vastus').empty().append(data); 
+          tiedotMjono = data.split(">");
+          for(var i of tiedotMjono){
+            var x = i.slice(15,-1);
+            if(!RuokaHahmot.includes(x)){
+              RuokaHahmot.push(x);
+            }
+            
+          }
+        });
+
+
+         
+      });
+      //lähetetään tiedot palvelimelle, haetaan kaikki tarvittavat tiedot ja aloitetaan ottelu
+      $("#ok").click(function(){
+        if(readData() == true){
+          osoite = `http://127.0.0.1:5000/players/${vastus1Data.replace("/","")}/${vastus2Data.replace("/","")}`;
+          osoite = osoite.replace(/ /g , "");
+          
+          $.get(osoite, function(data, status){
+            ValitutPelaajat = data;
+            
+            DataParser();
+
+
+          });
+
+          $("#vastus1").toggle(2000);
+          $("#vastus2").toggle(2000);
+          $("#labeli1").toggle(2000);
+          $("#labeli2").toggle(2000);
+          $("#ok").toggle(2000);
+          setTimeout(function(){
+            delay1 = hahmo1Tiedot.rasvat+hahmo1Tiedot.hiilihydraatit+hahmo1Tiedot.proteiinit;
+            delay2 = hahmo2Tiedot.rasvat+hahmo2Tiedot.hiilihydraatit+hahmo2Tiedot.proteiinit;
+            delay1 = delay1.toPrecision(2);
+            delay2 = delay2.toPrecision(2);
+            const healt1 = hahmo1Tiedot.kalorit;
+            const healt2 = hahmo2Tiedot.kalorit;
+            $("#ensimmainen").append('<p id="alkaapianteksti">Ottelu käynnistyy pian!</p>');
+            $("#ensimmainen").append(`<div class="card text-center" id="Pelaajakortti1" style="width: 18rem;"><ul><li><b>${hahmo1Tiedot.nimi}</b></li><li>${healt1} kcal</li><li>${hahmo1Tiedot.hiilihydraatit} g</li><li>Proteiini ${hahmo1Tiedot.proteiinit} g</li><li>Rasva ${hahmo1Tiedot.rasvat} g</li><br/><li>Healt: ${hahmo1Tiedot.kalorit}</li><li>Attack: ${hahmo1Tiedot.hiilihydraatit}</li><li>Defence: ${hahmo1Tiedot.proteiinit}</li><li>Delay: ${delay1}</li></ul></div>`);
+            $("#ensimmainen").append('<p id="vs">VS</p>')
+            $("#ensimmainen").append(`<div class="card text-center" id="Pelaajakortti2" style="width: 18rem;"><ul><li><b>${hahmo2Tiedot.nimi}</b></li><li>${healt2} kcal</li><li>${hahmo2Tiedot.hiilihydraatit} g</li><li>Proteiini ${hahmo2Tiedot.proteiinit} g</li><li>Rasva ${hahmo2Tiedot.rasvat} g</li><br/><li>Healt: ${hahmo2Tiedot.kalorit}</li><li>Attack: ${hahmo2Tiedot.hiilihydraatit}</li><li>Defence: ${hahmo2Tiedot.proteiinit}</li><li>Delay: ${delay2}</li></ul></div>`);
+            
+          },2000);
+
+          setTimeout(function(){
+            
+            AloitaOttelu(delay1,delay2);
+
+          },2000);
+
+        } else {
+          $("#error").text("Tarkista, että ruoka-aineet ovat oikein!");
+          
+          setTimeout(function(){
+            $("#error").text("");
+
+          },3000);
+
+          
+        }
+        
+      });
+
+
+    });
+
+
+  </script>
+
+</html>
