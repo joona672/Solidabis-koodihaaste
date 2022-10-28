@@ -20,7 +20,7 @@ flask run
 ```
 Käynnistyksen jälkeen mene osoitteeseen: 127.0.0.1:5000
 
-###Onnistuinko?
+####Onnistuinko?
 
 Tein ratkaisun muutamassa päivässä.Törmäsin haasteeseen valitettavan myöhään Facebookin kautta.
 Jos olisin tiennyt haasteesta aiemmin, olisi ollut enemmän aikaa suunnitella ja toteuttaa työtä. Olisin voinut tehdä Javascript koodista selkeämmän ja loogisemman.
